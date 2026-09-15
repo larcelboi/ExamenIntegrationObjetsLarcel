@@ -6,6 +6,7 @@ from nicegui import ui
 
 
 def creer_page():
+    @ui.page("/locaux/{numero}")
     async def page_detail_local(numero: str):
         bouton_retour()
 

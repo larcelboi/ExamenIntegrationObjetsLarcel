@@ -44,17 +44,17 @@ class CarteLocal(ui.card):
             ui.label(local.type_local).classes("text-sm text-gray-500")
 
             # Ajouter place disponible sur la carte
-            with ui.row():
+            with ui.row().classes("gap-1"):
                 nombre_place = ui.label().bind_text_from(etat, "occupation_actuelle")
-                ui.label("place disponibles")
+                ui.label("place disponibles / ")
                 nombre_place_max = ui.label().bind_text_from(local, "places_max")
 
             with ui.row().classes("items-center gap-1"):
                 self._point_qualite = ui.icon("circle").classes("text-xs")
+                ui.label("Qualité de l'air : ")
+
                 # Ajouter texte pour la qualité de l'air
-                ui.label(
-                    f"Qualité de l'air : {niveau_qualite_air(etat.qualite_air_ppm)}"
-                )
+                ui.label().bind_text_from(etat, "qualite_air_ppm")
 
             self.rafraichir()
 
