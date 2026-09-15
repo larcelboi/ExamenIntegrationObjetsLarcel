@@ -69,7 +69,11 @@ def creer_page():
                         cartes[numero] = CarteLocal(
                             local=local,
                             etat=etat,
-                            on_click=lambda n: ui.navigate.to(f"/locaux/{n}"),
+                            on_click=lambda numero: ui.navigate.to(
+                                # TODO FIX
+                                # Modifier le lien vers le bon api
+                                f"{API_URL}/api/locaux/{numero}"
+                            ),
                         )
                 else:
                     etat = etats[numero]
