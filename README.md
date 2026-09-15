@@ -34,7 +34,14 @@ Il s'agit d'une application de suivi et de gestion des locaux, connectée à des
 # Question
 - Complétez l'application de façon à répondre à toutes les exigences.
 - Expliquez comment se fait la validation des données dans votre application (répondez ici).
+    * Numéro :  Je vérifie si le numréro est entre 2.67 et 2.273, mais ça ne fonctionne pas bien
+    * Nom : Je vérifie la longueur. Elle doit être plus grande que 5 et inférieure à 30
+    * Commentaire : Je vérifie que sa longueur n'est pas plus longue que 200 charactères.
 - Ajoutez une capture d'écran montrant la struture de votre projet.
+
+<img width="1717" height="1249" alt="image" src="https://github.com/user-attachments/assets/68e46c8c-99e8-4853-ad0e-6297bc21dae0" />
+
+<img width="1713" height="1319" alt="image" src="https://github.com/user-attachments/assets/6a76689a-118a-435f-b118-fcd43c4c7d2b" />
 
 # ANNEXE 
 ![alt text](locaux.png)
