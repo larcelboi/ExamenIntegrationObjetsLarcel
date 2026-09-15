@@ -43,8 +43,18 @@ class CarteLocal(ui.card):
             ui.label(f"Local {local.nom}").classes("text-sm text-gray-500")
             ui.label(local.type_local).classes("text-sm text-gray-500")
 
+            # Ajouter place disponible sur la carte
+            with ui.row():
+                ui.label(
+                    f"{etat.occupation_actuelle} places disponibles / {local.places_max}"
+                )
+
             with ui.row().classes("items-center gap-1"):
                 self._point_qualite = ui.icon("circle").classes("text-xs")
+                # Ajouter texte pour la qualité de l'air
+                ui.label(
+                    f"Qualité de l'air : {niveau_qualite_air(etat.qualite_air_ppm)}"
+                )
 
             self.rafraichir()
 
