@@ -45,9 +45,9 @@ class CarteLocal(ui.card):
 
             # Ajouter place disponible sur la carte
             with ui.row():
-                ui.label(
-                    f"{etat.occupation_actuelle} places disponibles / {local.places_max}"
-                )
+                nombre_place = ui.label().bind_text_from(etat, "occupation_actuelle")
+                ui.label("place disponibles")
+                nombre_place_max = ui.label().bind_text_from(local, "places_max")
 
             with ui.row().classes("items-center gap-1"):
                 self._point_qualite = ui.icon("circle").classes("text-xs")

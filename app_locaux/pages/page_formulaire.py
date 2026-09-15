@@ -1,6 +1,7 @@
 from nicegui import ui
 from models.local import TypeLocal, Local
 import httpx
+from layout import bouton_retour
 
 lst_type_local = [TypeLocal.LABORATOIRE, TypeLocal.SALLE_SECHE]
 API_URL = "http://localhost:8000"
@@ -11,13 +12,17 @@ def creer_page():
     def page_formulaire():
 
         with ui.column().classes("w-full h-full"):
+            with ui.row():
+                bouton_retour()
             ui.label("Ajouter un local").classes("font-bold ")
 
             numero_local = ui.input(
                 label="Numéro de local",
                 placeholder="ex. 2.271",
                 validation={
-                    "Le numero est invalide": lambda e: len(e) >= 5,
+                    "Le numéro doit être entre 2.267 et 2.273 ": lambda e: (
+                        Local.field_validator(e)
+                    ),
                 },
             )
 
@@ -51,7 +56,8 @@ def creer_page():
             ui.label("Autres informations").classes("")
 
             commentaire = ui.textarea(
-                label="ex. prises électriques au plafond, accès fauteil roulant..."
+                label="ex. prises électriques au plafond, accès fauteil roulant...",
+                validation={"Le texte est trop long": lambda e: len(e) >= 200},
             ).props("clearable")
 
             ui.button(
@@ -100,12 +106,17 @@ async def ajouterlocal(
             json=local,
         )
 
-        print("asdas ENVOYÉ:", local)
+        print("local ENVOYÉ:", local)
         print("STATUS:", response.status_code)
         print("ERREUR API:", response.text)
 
+        if response.status_code == 422:
+            ui.notify(f"{response.text}", color="red")
+        else:
+            ui.notify(f"Le local {local['nom']} a été ajouté !!", color="green")
+            ui.navigate.to("/")
         response.raise_for_status()
 
         nouveau_gardien = response.json()
 
-        print("Gardien ajouté par l'API:", nouveau_gardien)
+        print("local ajouté par l'API:", nouveau_gardien)
